@@ -22,6 +22,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CowardAgent", "CowardAgent\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Coward", "Coward", "{5A72BF30-9AC3-4EB0-B101-774B8493FA66}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Morten_AI", "Morten_AI\Morten_AI.csproj", "{58A06532-3ADE-4757-9C6D-2E10D1E55177}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Morten_AIs", "Morten_AIs", "{0E59A67E-E1CF-4397-938F-30DAC35A5D78}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -84,6 +88,18 @@ Global
 		{C366E487-0D03-469C-AB57-69236F3ED0D7}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{C366E487-0D03-469C-AB57-69236F3ED0D7}.Release|x86.ActiveCfg = Release|Any CPU
 		{C366E487-0D03-469C-AB57-69236F3ED0D7}.Release|x86.Build.0 = Release|Any CPU
+		{58A06532-3ADE-4757-9C6D-2E10D1E55177}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58A06532-3ADE-4757-9C6D-2E10D1E55177}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58A06532-3ADE-4757-9C6D-2E10D1E55177}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{58A06532-3ADE-4757-9C6D-2E10D1E55177}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{58A06532-3ADE-4757-9C6D-2E10D1E55177}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{58A06532-3ADE-4757-9C6D-2E10D1E55177}.Debug|x86.Build.0 = Debug|Any CPU
+		{58A06532-3ADE-4757-9C6D-2E10D1E55177}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58A06532-3ADE-4757-9C6D-2E10D1E55177}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58A06532-3ADE-4757-9C6D-2E10D1E55177}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{58A06532-3ADE-4757-9C6D-2E10D1E55177}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{58A06532-3ADE-4757-9C6D-2E10D1E55177}.Release|x86.ActiveCfg = Release|Any CPU
+		{58A06532-3ADE-4757-9C6D-2E10D1E55177}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -94,6 +110,7 @@ Global
 		{724CBAAF-9C32-4588-AEEA-071578676130} = {11E37A2F-C50C-48D7-A2DC-ECC35E7F6091}
 		{DC6A9137-EF77-407F-B71D-A25EF363AC9F} = {11E37A2F-C50C-48D7-A2DC-ECC35E7F6091}
 		{C366E487-0D03-469C-AB57-69236F3ED0D7} = {5A72BF30-9AC3-4EB0-B101-774B8493FA66}
+		{58A06532-3ADE-4757-9C6D-2E10D1E55177} = {0E59A67E-E1CF-4397-938F-30DAC35A5D78}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E8CDAC78-399F-42E0-B605-73C37D048576}
