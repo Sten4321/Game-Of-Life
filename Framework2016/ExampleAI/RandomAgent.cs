@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using AIFramework;
 using AIFramework.Actions;
 using AIFramework.Entities;
-using System.Diagnostics;
 
 namespace ExampleAI
 {
@@ -22,11 +22,11 @@ namespace ExampleAI
         {
             rnd = new Random();
             MovementSpeed = 35;
-            Strength= 35;
-            Health= 70;
-            Eyesight= 30;
-            Endurance= 25;
-            Dodge= 55;
+            Strength = 35;
+            Health = 70;
+            Eyesight = 30;
+            Endurance = 25;
+            Dodge = 55;
 
 
             moveX = rnd.Next(-1, 2);
@@ -38,11 +38,8 @@ namespace ExampleAI
 
         public override IAction GetNextAction(List<IEntity> otherEntities)
         {
-
-
-            List<Agent> agents = otherEntities.FindAll(a=>a is Agent).ConvertAll<Agent>(a=>(Agent)a);
-            List<IEntity> plants = otherEntities.FindAll(a=>a is Plant);
-
+            List<Agent> agents = otherEntities.FindAll(a => a is Agent).ConvertAll<Agent>(a => (Agent)a);
+            List<IEntity> plants = otherEntities.FindAll(a => a is Plant);
 
             Agent rndAgent = null;
             rndAgent = agents[rnd.Next(agents.Count)];
@@ -79,10 +76,10 @@ namespace ExampleAI
         }
 
 
-        
+
         public override void ActionResultCallback(bool success)
         {
-           //Do nothing - AI dont take success of an action into account
+            //Do nothing - AI dont take success of an action into account
         }
     }
 }
