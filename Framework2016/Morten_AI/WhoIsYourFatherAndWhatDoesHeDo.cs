@@ -11,24 +11,27 @@ namespace Morten_AI
 {
     public class WhoIsYourFatherAndWhatDoesHeDo : Agent
     {
-
+        Agent EnemyAgent;
+        IEntity nearByPlant;
+        int caseNumber=0;
+        List<Agent> agents = new List<Agent>();
 
         Random rnd;
 
         //Only for randomization of movement
-        float moveX = 0;
-        float moveY = 0;
+        float moveX = 10;
+        float moveY = 10;
 
         public WhoIsYourFatherAndWhatDoesHeDo(IPropertyStorage propertyStorage)
             : base(propertyStorage)
         {
             rnd = new Random();
-            MovementSpeed = 35;
-            Strength = 35;
-            Health = 70;
-            Eyesight = 30;
-            Endurance = 25;
-            Dodge = 55;
+            MovementSpeed = 150;
+            Strength = 1;
+            Health = 1;
+            Eyesight = 50;
+            Endurance = 47;
+            Dodge = 1;
 
 
             moveX = rnd.Next(-1, 2);
@@ -40,28 +43,40 @@ namespace Morten_AI
 
         public override IAction GetNextAction(List<IEntity> otherEntities)
         {
-
-
             List<Agent> agents = otherEntities.FindAll(a => a is Agent).ConvertAll<Agent>(a => (Agent)a);
             List<IEntity> plants = otherEntities.FindAll(a => a is Plant);
-
-
-            Agent rndAgent = null;
-            rndAgent = agents[rnd.Next(agents.Count)];
-
-            switch (rnd.Next(5))
+            EnemyAgent = null;
+            
+            foreach (var agent in agents)
+            {
+                if (agent.GetType() != typeof(WhoIsYourFatherAndWhatDoesHeDo))
+                {
+                    if (agent.Position == this.Position)
+                    {
+                        caseNumber = 2;
+                        break;
+                    }
+                    else
+                    {
+                        caseNumber = 4;
+                    }
+                }
+                Console.WriteLine(agent.Position.X);
+                Console.WriteLine(agent.Position.Y);
+            }
+            foreach (var plant in plants)
+            {
+                
+            }
+            switch (caseNumber)
             {
                 case 1: //Procreate
-                    if (rndAgent != null && rndAgent.GetType() == typeof(WhoIsYourFatherAndWhatDoesHeDo))
-                    {
-                        return new Procreate(rndAgent);
-                    }
-                    break;
+                    return new Procreate(this);
 
                 case 2: //Attack Melee
-                    if (rndAgent != null && rndAgent.GetType() != typeof(WhoIsYourFatherAndWhatDoesHeDo))
+                    if (EnemyAgent != null)
                     {
-                        return new Attack(rndAgent);
+                        return new Attack(EnemyAgent);
                     }
                     break;
                 case 3: //Feed
@@ -71,20 +86,56 @@ namespace Morten_AI
                     }
                     break;
                 case 4: //Move
-                    return new Move(new AIVector(moveX, moveY));
+                    if (this.Position.X > 990)
+                    {
+                        return new Move(new AIVector(-2, 0));
+                    }
+                    else if (this.Position.X < 5)
+                    {
+                        return new Move(new AIVector(2, 0));
+                    }
+                    else if (this.Position.Y < 5)
+                    {
+                        return new Move(new AIVector(0, 2));
+                    }
+                    else if (this.Position.Y > 550)
+                    {
+                        return new Move(new AIVector(0, -2));
+                    }
+                    else
+                    {
+
+                    }
+                    break;
                 default:
                     return new Defend();
             }
-
-            return new Move(new AIVector(moveX, moveY));
-
+            if (this.Position.X > 990)
+            {
+                return new Move(new AIVector(-2, 0));
+            }
+            else if (this.Position.X < 5)
+            {
+                return new Move(new AIVector(2, 0));
+            }
+            else if (this.Position.Y < 5)
+            {
+                return new Move(new AIVector(0, 2));
+            }
+            else if (this.Position.Y > 550)
+            {
+                return new Move(new AIVector(0, -2));
+            }
+            else
+            {
+                return new Move(new AIVector(2, 0));
+            }
         }
-
-
-
+        
         public override void ActionResultCallback(bool success)
         {
             //Do nothing - AI dont take success of an action into account
+            
         }
     }
 }

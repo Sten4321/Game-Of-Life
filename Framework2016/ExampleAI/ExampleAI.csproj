@@ -60,10 +60,8 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>move "$(TargetPath)" "$(SolutionDir)GameOfLife\bin\Debug\plugins\$(TargetFileName)"
-move "$(TargetDir)\Icon.png" "$(SolutionDir)GameOfLife\bin\Debug\plugins\$(TargetName).png"
-
-</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
