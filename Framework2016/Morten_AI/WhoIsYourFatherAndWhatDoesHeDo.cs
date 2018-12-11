@@ -15,27 +15,20 @@ namespace Morten_AI
         IEntity nearByPlant;
         int caseNumber=0;
         List<Agent> agents = new List<Agent>();
-
+        AIVector iMove;
         Random rnd;
-
-        //Only for randomization of movement
-        float moveX = 10;
-        float moveY = 10;
 
         public WhoIsYourFatherAndWhatDoesHeDo(IPropertyStorage propertyStorage)
             : base(propertyStorage)
         {
             rnd = new Random();
-            MovementSpeed = 150;
+            MovementSpeed = 97;
             Strength = 1;
             Health = 1;
             Eyesight = 50;
-            Endurance = 47;
+            Endurance = 100;
             Dodge = 1;
-
-
-            moveX = rnd.Next(-1, 2);
-            moveY = rnd.Next(-1, 2);
+            
             string ddd = this.GetType().FullName;
         }
 
@@ -46,90 +39,81 @@ namespace Morten_AI
             List<Agent> agents = otherEntities.FindAll(a => a is Agent).ConvertAll<Agent>(a => (Agent)a);
             List<IEntity> plants = otherEntities.FindAll(a => a is Plant);
             EnemyAgent = null;
-            
-            foreach (var agent in agents)
+            iMove = null;
+            //Clone
+            if (iMove == null)
             {
-                if (agent.GetType() != typeof(WhoIsYourFatherAndWhatDoesHeDo))
-                {
-                    if (agent.Position == this.Position)
-                    {
-                        caseNumber = 2;
-                        break;
-                    }
-                    else
-                    {
-                        caseNumber = 4;
-                    }
-                }
-                Console.WriteLine(agent.Position.X);
-                Console.WriteLine(agent.Position.Y);
+                //return new Procreate(this);
             }
-            foreach (var plant in plants)
-            {
-                
-            }
-            switch (caseNumber)
-            {
-                case 1: //Procreate
-                    return new Procreate(this);
 
-                case 2: //Attack Melee
-                    if (EnemyAgent != null)
+            //Move
+            if (iMove == null)
+            {
+                if (plants.Count > 0)
+                {
+                    var plant = plants.ElementAt(0);
+                    if (plant.Position.X - Position.X > 1 || plant.Position.Y - Position.Y > 1)
                     {
-                        return new Attack(EnemyAgent);
+                        iMove = new AIVector((plant.Position.X - Position.X), (plant.Position.Y - Position.Y));
                     }
-                    break;
-                case 3: //Feed
-                    if (plants.Count > 0)
+                    else if (plant.Position.X - Position.X < 1 || plant.Position.Y - Position.Y < 1)
                     {
                         return new Feed((Plant)plants[rnd.Next(plants.Count)]);
                     }
-                    break;
-                case 4: //Move
-                    if (this.Position.X > 990)
-                    {
-                        return new Move(new AIVector(-2, 0));
-                    }
-                    else if (this.Position.X < 5)
-                    {
-                        return new Move(new AIVector(2, 0));
-                    }
-                    else if (this.Position.Y < 5)
-                    {
-                        return new Move(new AIVector(0, 2));
-                    }
-                    else if (this.Position.Y > 550)
-                    {
-                        return new Move(new AIVector(0, -2));
-                    }
-                    else
-                    {
-
-                    }
-                    break;
-                default:
-                    return new Defend();
+                    
+                }
             }
-            if (this.Position.X > 990)
+            //Attack
+            if (iMove == null)
             {
-                return new Move(new AIVector(-2, 0));
+                foreach (var agent in agents)
+                {
+                    if (agent.GetType() == typeof(WhoIsYourFatherAndWhatDoesHeDo))
+                    {
+                        if (agent.Position.X - Position.X < 10 && agent.Position.Y - Position.Y < 10)
+                        {
+                            iMove = new AIVector((agent.Position.X + Position.X), (agent.Position.Y + Position.Y));
+                        }
+                    }
+                    if (agent.GetType() != typeof(WhoIsYourFatherAndWhatDoesHeDo))
+                    {
+                        if (agent.Position.X-Position.X > 1 && agent.Position.Y - Position.Y > 1)
+                        {
+                            iMove = new AIVector((agent.Position.X-Position.X),(agent.Position.Y-Position.Y));
+                        }
+                        else if (agent.Position.X - Position.X < 1 && agent.Position.Y - Position.Y < 1)
+                        {
+                            return new Attack(agent);
+                        }
+                    }
+                }
             }
-            else if (this.Position.X < 5)
+            
+            if (iMove == null)
             {
-                return new Move(new AIVector(2, 0));
+                if (Position.X > 970)
+                {
+                    iMove = new AIVector(-1, 0);
+                }
+                else if (Position.X < 20)
+                {
+                    iMove = new AIVector(1, 0);
+                }
+                else if (Position.Y < 20)
+                {
+                    iMove = new AIVector(0, 1);
+                }
+                else if (Position.Y > 530)
+                {
+                    iMove = new AIVector(0, -1);
+                }
+                if (iMove == null)
+                {
+                    iMove = new AIVector(rnd.Next(-1,1),rnd.Next(-1,1));
+                }
             }
-            else if (this.Position.Y < 5)
-            {
-                return new Move(new AIVector(0, 2));
-            }
-            else if (this.Position.Y > 550)
-            {
-                return new Move(new AIVector(0, -2));
-            }
-            else
-            {
-                return new Move(new AIVector(2, 0));
-            }
+            Console.WriteLine(Position.X);
+            return new Move(iMove);
         }
         
         public override void ActionResultCallback(bool success)
