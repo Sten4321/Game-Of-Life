@@ -21,8 +21,8 @@ namespace Morten_AI
             MovementSpeed = 97;
             Strength = 1;
             Health = 1;
-            Eyesight = 50;
-            Endurance = 100;
+            Eyesight = 130;
+            Endurance = 20;
             Dodge = 1;
             
 
@@ -42,74 +42,68 @@ namespace Morten_AI
                 //return new Procreate(this);
             }
 
-            //Move
-            //if (iMove == null)
-            //{
-            //    if (plants.Count > 0)
-            //    {
-            //        var plant = plants.ElementAt(rnd.Next(plants.Count));
-            //        if (plant.Position.X - Position.X > 1 || plant.Position.Y - Position.Y > 1)
-            //        {
-            //            iMove = new AIVector((plant.Position.X - Position.X+1), (plant.Position.Y - Position.Y+1));
-            //        }
-            //        else if (plant.Position.X - Position.X < 1 || plant.Position.Y - Position.Y < 1)
-            //        {
-            //            return new Feed((Plant)plants[rnd.Next(plants.Count)]);
-            //        }
-                    
-            //    }
-            //}
-            ////Attack
-            //if (iMove == null)
-            //{
-            //    foreach (var agent in agents)
-            //    {
-            //        if (agent.GetType() == typeof(WhoIsYourFatherAndWhatDoesHeDo))
-            //        {
-            //            if (agent.Position.X - Position.X < 50 && agent.Position.Y - Position.Y < 50)
-            //            {
-            //                iMove = new AIVector((agent.Position.X + Position.X), (agent.Position.Y + Position.Y));
-            //            }
-            //        }
-            //        if (agent.GetType() != typeof(WhoIsYourFatherAndWhatDoesHeDo))
-            //        {
-            //            if (agent.Position.X-Position.X > 1 && agent.Position.Y - Position.Y > 1)
-            //            {
-            //                iMove = new AIVector((agent.Position.X-Position.X+1),(agent.Position.Y-Position.Y+1));
-            //            }
-            //            else if (agent.Position.X - Position.X < 1 && agent.Position.Y - Position.Y < 1)
-            //            {
-            //                return new Attack(agent);
-            //            }
-            //        }
-            //    }
-            //}
-            
+            //Eat
             if (iMove == null)
             {
-                iMove = new AIVector(rnd.Next(-1,1), rnd.Next(-1,1));
-                if (Position.X > 970)
+                if (plants.Count > 0)
                 {
-                    iMove = new AIVector(-1, 0);
-                }
-                else if (Position.X < 20)
-                {
-                    iMove = new AIVector(1, 0);
-                }
-                else if (Position.Y < 20)
-                {
-                    iMove = new AIVector(0, 1);
-                }
-                else if (Position.Y > 530)
-                {
-                    iMove = new AIVector(0, -1);
-                }
-                if (iMove == null)
-                {
+                    var plant = plants.ElementAt(rnd.Next(plants.Count));
+                    if (plant.Position.X - Position.X > 1 || plant.Position.Y - Position.Y > 1)
+                    {
+                        iMove = new AIVector((plant.Position.X - Position.X + 1), (plant.Position.Y - Position.Y + 1));
+                    }
+                    else if (plant.Position.X - Position.X < 1 || plant.Position.Y - Position.Y < 1)
+                    {
+                        return new Feed((Plant)plants[rnd.Next(plants.Count)]);
+                    }
 
                 }
             }
-            Console.WriteLine(Position.X);
+            //Attack
+            if (iMove == null)
+            {
+                foreach (var agent in agents)
+                {
+                    if (agent.GetType() != typeof(WhoIsYourFatherAndWhatDoesHeDo))
+                    {
+                        if (agent.Position.X - Position.X > 1 && agent.Position.Y - Position.Y > 1)
+                        {
+                            iMove = new AIVector((agent.Position.X - Position.X + 1), (agent.Position.Y - Position.Y + 1));
+                            break;
+                        }
+                        else if (agent.Position.X - Position.X < 1 && agent.Position.Y - Position.Y < 1)
+                        {
+                            return new Attack(agent);
+                        }
+                    }
+                }
+            }
+
+            if (iMove == null)
+            {
+
+                //if (Position.X > 970)
+                //{
+                //    iMove = new AIVector(-1, 0);
+                //}
+                //else if (Position.X < 20)
+                //{
+                //    iMove = new AIVector(1, 0);
+                //}
+                //else if (Position.Y < 20)
+                //{
+                //    iMove = new AIVector(0, 1);
+                //}
+                //else if (Position.Y > 530)
+                //{
+                //    iMove = new AIVector(0, -1);
+                //}
+                if (iMove == null)
+                {
+                    iMove = new AIVector(rnd.Next(-1, 2), rnd.Next(-1, 2));
+                }
+            }
+            Console.WriteLine(iMove.X.ToString());
             return new Move(iMove);
         }
         
