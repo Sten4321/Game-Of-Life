@@ -11,13 +11,9 @@ namespace Morten_AI
 {
     public class WhoIsYourFatherAndWhatDoesHeDo : Agent
     {
-        Agent EnemyAgent;
-        IEntity nearByPlant;
-        int caseNumber=0;
         List<Agent> agents = new List<Agent>();
         AIVector iMove;
         Random rnd;
-
         public WhoIsYourFatherAndWhatDoesHeDo(IPropertyStorage propertyStorage)
             : base(propertyStorage)
         {
@@ -29,6 +25,7 @@ namespace Morten_AI
             Endurance = 100;
             Dodge = 1;
             
+
             string ddd = this.GetType().FullName;
         }
 
@@ -38,7 +35,6 @@ namespace Morten_AI
         {
             List<Agent> agents = otherEntities.FindAll(a => a is Agent).ConvertAll<Agent>(a => (Agent)a);
             List<IEntity> plants = otherEntities.FindAll(a => a is Plant);
-            EnemyAgent = null;
             iMove = null;
             //Clone
             if (iMove == null)
@@ -47,50 +43,51 @@ namespace Morten_AI
             }
 
             //Move
-            if (iMove == null)
-            {
-                if (plants.Count > 0)
-                {
-                    var plant = plants.ElementAt(0);
-                    if (plant.Position.X - Position.X > 1 || plant.Position.Y - Position.Y > 1)
-                    {
-                        iMove = new AIVector((plant.Position.X - Position.X), (plant.Position.Y - Position.Y));
-                    }
-                    else if (plant.Position.X - Position.X < 1 || plant.Position.Y - Position.Y < 1)
-                    {
-                        return new Feed((Plant)plants[rnd.Next(plants.Count)]);
-                    }
+            //if (iMove == null)
+            //{
+            //    if (plants.Count > 0)
+            //    {
+            //        var plant = plants.ElementAt(rnd.Next(plants.Count));
+            //        if (plant.Position.X - Position.X > 1 || plant.Position.Y - Position.Y > 1)
+            //        {
+            //            iMove = new AIVector((plant.Position.X - Position.X+1), (plant.Position.Y - Position.Y+1));
+            //        }
+            //        else if (plant.Position.X - Position.X < 1 || plant.Position.Y - Position.Y < 1)
+            //        {
+            //            return new Feed((Plant)plants[rnd.Next(plants.Count)]);
+            //        }
                     
-                }
-            }
-            //Attack
-            if (iMove == null)
-            {
-                foreach (var agent in agents)
-                {
-                    if (agent.GetType() == typeof(WhoIsYourFatherAndWhatDoesHeDo))
-                    {
-                        if (agent.Position.X - Position.X < 10 && agent.Position.Y - Position.Y < 10)
-                        {
-                            iMove = new AIVector((agent.Position.X + Position.X), (agent.Position.Y + Position.Y));
-                        }
-                    }
-                    if (agent.GetType() != typeof(WhoIsYourFatherAndWhatDoesHeDo))
-                    {
-                        if (agent.Position.X-Position.X > 1 && agent.Position.Y - Position.Y > 1)
-                        {
-                            iMove = new AIVector((agent.Position.X-Position.X),(agent.Position.Y-Position.Y));
-                        }
-                        else if (agent.Position.X - Position.X < 1 && agent.Position.Y - Position.Y < 1)
-                        {
-                            return new Attack(agent);
-                        }
-                    }
-                }
-            }
+            //    }
+            //}
+            ////Attack
+            //if (iMove == null)
+            //{
+            //    foreach (var agent in agents)
+            //    {
+            //        if (agent.GetType() == typeof(WhoIsYourFatherAndWhatDoesHeDo))
+            //        {
+            //            if (agent.Position.X - Position.X < 50 && agent.Position.Y - Position.Y < 50)
+            //            {
+            //                iMove = new AIVector((agent.Position.X + Position.X), (agent.Position.Y + Position.Y));
+            //            }
+            //        }
+            //        if (agent.GetType() != typeof(WhoIsYourFatherAndWhatDoesHeDo))
+            //        {
+            //            if (agent.Position.X-Position.X > 1 && agent.Position.Y - Position.Y > 1)
+            //            {
+            //                iMove = new AIVector((agent.Position.X-Position.X+1),(agent.Position.Y-Position.Y+1));
+            //            }
+            //            else if (agent.Position.X - Position.X < 1 && agent.Position.Y - Position.Y < 1)
+            //            {
+            //                return new Attack(agent);
+            //            }
+            //        }
+            //    }
+            //}
             
             if (iMove == null)
             {
+                iMove = new AIVector(rnd.Next(-1,1), rnd.Next(-1,1));
                 if (Position.X > 970)
                 {
                     iMove = new AIVector(-1, 0);
@@ -109,7 +106,7 @@ namespace Morten_AI
                 }
                 if (iMove == null)
                 {
-                    iMove = new AIVector(rnd.Next(-1,1),rnd.Next(-1,1));
+
                 }
             }
             Console.WriteLine(Position.X);
