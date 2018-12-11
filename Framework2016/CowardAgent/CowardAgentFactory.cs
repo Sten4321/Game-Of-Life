@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using AIFramework;
 using AIFramework.Entities;
-using System.Diagnostics;
-using System.Reflection;
 
 namespace CowardAgent
 {
     class CowardAgentFactory : AgentFactory
     {
+        int lastId = 0;
         /// <summary>
         /// create base agent
         /// </summary>
@@ -18,7 +19,8 @@ namespace CowardAgent
         /// <returns></returns>
         public override Agent CreateAgent(IPropertyStorage propertyStorage)
         {
-            return new CowardAgent(propertyStorage);
+            lastId++;
+            return new CowardAgent(propertyStorage, lastId);
         }
 
         /// <summary>
@@ -30,7 +32,8 @@ namespace CowardAgent
         /// <returns></returns>
         public override Agent CreateAgent(Agent parent1, Agent parent2, IPropertyStorage propertyStorage)
         {
-            return new CowardAgent(propertyStorage);
+            lastId++;
+            return new CowardAgent(propertyStorage, lastId);
         }
 
         public override Type ProvidedAgentType
