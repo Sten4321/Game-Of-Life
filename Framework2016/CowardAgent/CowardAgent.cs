@@ -15,6 +15,8 @@ namespace CowardAgent
         int id;
         Random rnd = new Random();
         public AIVector direction { get; set; } = new AIVector(0, 0);
+        public AIVector lastPos { get; set; }
+        public AIVector lastDirection { get; set; }
         public int lastDirectionAction { get; set; } = 0;
         public int action { get; set; } = 0;
         public int MoveCheckDelay { get; } = 5;

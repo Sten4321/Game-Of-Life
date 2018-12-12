@@ -34,22 +34,32 @@ namespace CowardAgent
 
         public void Enter(CowardAgent obj)
         {
-
-        }
-
-        public void Execute(CowardAgent obj)
-        {
             //Change your Direction
             if ((obj.lastDirectionAction + obj.directionChangeDelay <= obj.action) || (obj.direction.X == 0 && obj.direction.Y == 0))
             {
                 obj.lastDirectionAction = obj.action;
                 obj.direction = new AIVector(rnd.Next(-1, 2), rnd.Next(-1, 2));
-                obj.NextAction = new Move(obj.direction);//search direction
+            }
+        }
+
+        public void Execute(CowardAgent obj)
+        {
+            if (obj.lastDirectionAction + obj.directionChangeDelay <= obj.action)
+            {
+                if (obj.lastPos != null)
+                {
+                    if (obj.lastPos == obj.Position)
+                    {
+                        obj.direction = obj.lastDirection * -1;
+                    }
+                }
+
+                obj.lastDirection = obj.direction;
+                obj.lastPos = obj.Position;
             }
 
             //Just Move already
             obj.NextAction = new Move(obj.direction);//move
-            obj.FSM.ChangeState(Multiply.Instance);
         }
 
         public void Exit(CowardAgent obj)
