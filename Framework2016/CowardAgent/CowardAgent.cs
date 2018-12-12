@@ -36,7 +36,7 @@ namespace CowardAgent
             Strength = 0;//flat dmg
             Health = 20;//flat health
             Eyesight = 80;//flat distance
-            Endurance = 5;//hunger >= Endurance (30 -> 47 about sec)
+            Endurance = 5;//if hunger below endurance gain health regain
             Dodge = 0;//flat chace of dodge
             if (MovementSpeed + Strength + Health + Eyesight + Endurance + Dodge > 250)
             {
