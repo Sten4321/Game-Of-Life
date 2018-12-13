@@ -32,7 +32,7 @@ namespace CowardAgent.States.AgentStates
 
         public void Enter(CowardAgent obj)
         {
-            
+
         }
 
         public void Execute(CowardAgent obj)
@@ -52,7 +52,18 @@ namespace CowardAgent.States.AgentStates
                     }
                 }
             }
-            obj.FSM.ChangeState(Flee.Instance);
+            switch (obj.cowardAgentType)
+            {
+                case cowardType.coward:
+                    obj.FSM.ChangeState(Flee.Instance);
+                    break;
+                case cowardType.nonCoward:
+                    obj.FSM.ChangeState(DMG.Instance);
+                    break;
+                default:
+                    obj.FSM.ChangeState(Flee.Instance);
+                    break;
+            }
         }
 
         public void Exit(CowardAgent obj)

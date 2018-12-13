@@ -12,6 +12,9 @@ namespace CowardAgent
     class CowardAgentFactory : AgentFactory
     {
         int lastId = 0;
+        int cowardsMade = 0;
+        int noncowards = 0;
+
         /// <summary>
         /// create base agent
         /// </summary>
@@ -20,7 +23,17 @@ namespace CowardAgent
         public override Agent CreateAgent(IPropertyStorage propertyStorage)
         {
             lastId++;
-            return new CowardAgent(propertyStorage, lastId);
+            if (cowardsMade * 0.2 > noncowards)
+            {
+                noncowards++;
+                cowardsMade++;
+                return new CowardAgent(propertyStorage, lastId, cowardType.nonCoward);
+            }
+            else
+            {
+                cowardsMade++;
+                return new CowardAgent(propertyStorage, lastId, cowardType.coward);
+            }
         }
 
         /// <summary>
@@ -33,7 +46,17 @@ namespace CowardAgent
         public override Agent CreateAgent(Agent parent1, Agent parent2, IPropertyStorage propertyStorage)
         {
             lastId++;
-            return new CowardAgent(propertyStorage, lastId);
+            if (cowardsMade * 0.2 >= noncowards)
+            {
+                noncowards++;
+                cowardsMade++;
+                return new CowardAgent(propertyStorage, lastId, cowardType.nonCoward);
+            }
+            else
+            {
+                cowardsMade++;
+                return new CowardAgent(propertyStorage, lastId, cowardType.coward);
+            }
         }
 
         public override Type ProvidedAgentType
@@ -49,6 +72,8 @@ namespace CowardAgent
         public override void RegisterWinners(List<Agent> sortedAfterDeathTime)
         {
             //Do data collection - Perhaps used to evolutionary algoritmen
+            Console.WriteLine("nonCowards: " + noncowards);
+            Console.WriteLine("Cowards: " + (cowardsMade - noncowards));
         }
     }
 }

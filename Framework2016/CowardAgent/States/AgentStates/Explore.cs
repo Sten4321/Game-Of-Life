@@ -44,18 +44,22 @@ namespace CowardAgent
 
         public void Execute(CowardAgent obj)
         {
-            if (obj.lastDirectionAction + obj.directionChangeDelay <= obj.action)
+            if (obj.lastDirectionAction + (obj.directionChangeDelay / 5) <= obj.action)
             {
                 if (obj.lastPos != null)
                 {
-                    if (obj.lastPos == obj.Position)
+                    if (obj.lastPos.X == obj.Position.X && ((obj.lastDirection.X < 0 && obj.direction.X < 0) || (obj.lastDirection.X > 0 && obj.direction.X > 0)))
                     {
-                        obj.direction = obj.lastDirection * -1;
+                        obj.direction.X = obj.direction.X * -1;
+                    }
+                    if (obj.lastPos.Y == obj.Position.Y && ((obj.lastDirection.Y < 0 && obj.direction.Y < 0) || (obj.lastDirection.Y > 0 && obj.direction.Y > 0)))
+                    {
+                        obj.direction.Y = obj.direction.Y * -1;
                     }
                 }
 
-                obj.lastDirection = obj.direction;
-                obj.lastPos = obj.Position;
+                obj.lastDirection = new AIVector(obj.direction.X, obj.direction.Y);
+                obj.lastPos = new AIVector(obj.Position.X, obj.Position.Y);
             }
 
             //Just Move already

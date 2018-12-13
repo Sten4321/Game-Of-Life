@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="States\AgentStates\FindEnemies.cs" />
+    <Compile Include="States\AgentStates\DMG.cs" />
     <Compile Include="CowardAgent.cs" />
     <Compile Include="CowardAgentFactory.cs" />
     <Compile Include="States\AgentStates\Explore.cs" />
