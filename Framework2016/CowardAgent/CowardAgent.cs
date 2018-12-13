@@ -10,6 +10,8 @@ using CowardAgent.States.AgentStates;
 
 namespace CowardAgent
 {
+    public enum cowardType { coward, nonCoward }
+
     public class CowardAgent : Agent
     {
         int id;
@@ -20,9 +22,10 @@ namespace CowardAgent
         public int lastDirectionAction { get; set; } = 0;
         public int action { get; set; } = 0;
         public int MoveCheckDelay { get; } = 5;
-        public int directionChangeDelay { get; } = 250;
+        public int directionChangeDelay { get; } = 300;
         public float enemyBufferDistance { get; } = 15.0f;
         public float bufferDistance { get; } = 20.0f;
+        public cowardType cowardAgentType { get; private set; }
 
         FSM<CowardAgent> fsm;
 
@@ -49,18 +52,33 @@ namespace CowardAgent
         /// Constructer
         /// </summary>
         /// <param name="propertyStorage"></param>
-        public CowardAgent(IPropertyStorage propertyStorage, int id)
+        public CowardAgent(IPropertyStorage propertyStorage, int id, cowardType type)
             : base(propertyStorage)
         {
+            cowardAgentType = type;
             this.id = id;
             #region Stats
-            //Max 250
-            MovementSpeed = 160;//flat * movement
-            Strength = 0;//flat dmg
-            Health = 10;//flat health
-            Eyesight = 80;//flat distance
-            Endurance = 0;//if hunger below endurance gain health regain
-            Dodge = 0;//flat chace of dodge
+            switch (type)
+            {
+                case cowardType.coward:
+                    //Max 250
+                    MovementSpeed = 160;//flat * movement
+                    Strength = 0;//flat dmg
+                    Health = 10;//flat health
+                    Eyesight = 80;//flat distance
+                    Endurance = 0;//if hunger below endurance gain health regain
+                    Dodge = 0;//flat chace of dodge
+                    break;
+                case cowardType.nonCoward:
+                    //Max 250
+                    MovementSpeed = 130;//flat * movement
+                    Strength = 40;//flat dmg
+                    Health = 40;//flat health
+                    Eyesight = 40;//flat distance
+                    Endurance = 0;//if hunger below endurance gain health regain
+                    Dodge = 0;//flat chace of dodge
+                    break;
+            }
             if (MovementSpeed + Strength + Health + Eyesight + Endurance + Dodge > 250)
             {
                 throw new Exception("Too high stats");

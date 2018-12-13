@@ -53,7 +53,25 @@ namespace CowardAgent.States.AgentStates
                     }
                 }
             }
-            obj.FSM.ChangeState(FindFood.Instance);
+            switch (obj.cowardAgentType)
+            {
+                case cowardType.coward:
+                    obj.FSM.ChangeState(FindFood.Instance);
+                    break;
+                case cowardType.nonCoward:
+                    if (!(obj.Hunger > 60))
+                    {
+                        obj.FSM.ChangeState(FindEnemies.Instance);
+                    }
+                    else
+                    {
+                        obj.FSM.ChangeState(FindFood.Instance);
+                    }
+                    break;
+                default:
+                    obj.FSM.ChangeState(FindFood.Instance);
+                    break;
+            }
         }
 
         public void Exit(CowardAgent obj)
