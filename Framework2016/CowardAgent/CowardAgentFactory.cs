@@ -23,7 +23,7 @@ namespace CowardAgent
         public override Agent CreateAgent(IPropertyStorage propertyStorage)
         {
             lastId++;
-            if (cowardsMade * 0.2 > noncowards)
+            if (cowardsMade * 0.3 > noncowards)
             {
                 noncowards++;
                 cowardsMade++;
@@ -46,7 +46,7 @@ namespace CowardAgent
         public override Agent CreateAgent(Agent parent1, Agent parent2, IPropertyStorage propertyStorage)
         {
             lastId++;
-            if (cowardsMade * 0.2 >= noncowards)
+            if (cowardsMade * 0.3 >= noncowards)
             {
                 noncowards++;
                 cowardsMade++;
