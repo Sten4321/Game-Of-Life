@@ -7,9 +7,9 @@ using AIFramework;
 using AIFramework.Actions;
 using AIFramework.Entities;
 
-namespace CowardAgent.States.AgentStates
+namespace Speedy.States.AgentStates
 {
-    class FindMate : IState<CowardAgent>
+    class FindMate : IState<Speedy>
     {
         private static FindMate _instance;
 
@@ -30,20 +30,20 @@ namespace CowardAgent.States.AgentStates
 
         }
 
-        public void Enter(CowardAgent obj)
+        public void Enter(Speedy obj)
         {
 
         }
 
-        public void Execute(CowardAgent obj)
+        public void Execute(Speedy obj)
         {
-            List<IEntity> nearCoward = obj.ViewedEntities.FindAll(x => x is CowardAgent
+            List<IEntity> nearCoward = obj.ViewedEntities.FindAll(x => x is Speedy
             && x != obj);
 
             //Find Your Mate
             if (nearCoward.Count > 0 && obj.ProcreationCountDown <= 0)
             {
-                foreach (CowardAgent coward in nearCoward)
+                foreach (Speedy coward in nearCoward)
                 {
                     if (coward.ProcreationCountDown <= 0)
                     {
@@ -74,7 +74,7 @@ namespace CowardAgent.States.AgentStates
             }
         }
 
-        public void Exit(CowardAgent obj)
+        public void Exit(Speedy obj)
         {
 
         }

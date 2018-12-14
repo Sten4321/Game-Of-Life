@@ -7,9 +7,9 @@ using AIFramework;
 using AIFramework.Actions;
 using AIFramework.Entities;
 
-namespace CowardAgent
+namespace Speedy
 {
-    class Flee : IState<CowardAgent>
+    class Flee : IState<Speedy>
     {
         private static Flee _instance;
         Random rnd;
@@ -31,14 +31,14 @@ namespace CowardAgent
             rnd = new Random();
         }
 
-        public void Enter(CowardAgent obj)
+        public void Enter(Speedy obj)
         {
 
         }
 
-        public void Execute(CowardAgent obj)
+        public void Execute(Speedy obj)
         {
-            List<IEntity> nearEnemies = obj.ViewedEntities.FindAll(x => x.GetType() != typeof(CowardAgent)
+            List<IEntity> nearEnemies = obj.ViewedEntities.FindAll(x => x.GetType() != typeof(Speedy)
             && x is Agent && AIVector.Distance(obj.Position, x.Position) < AIModifiers.maxMeleeAttackRange + obj.enemyBufferDistance);
 
             //Flee you fools
@@ -71,7 +71,7 @@ namespace CowardAgent
 
         }
 
-        public void Exit(CowardAgent obj)
+        public void Exit(Speedy obj)
         {
 
         }

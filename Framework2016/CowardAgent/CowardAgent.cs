@@ -6,13 +6,13 @@ using System.Text;
 using AIFramework;
 using AIFramework.Actions;
 using AIFramework.Entities;
-using CowardAgent.States.AgentStates;
+using Speedy.States.AgentStates;
 
-namespace CowardAgent
+namespace Speedy
 {
     public enum cowardType { coward, nonCoward }
 
-    public class CowardAgent : Agent
+    public class Speedy : Agent
     {
         int id;
         Random rnd = new Random();
@@ -27,9 +27,9 @@ namespace CowardAgent
         public float bufferDistance { get; } = 20.0f;
         public cowardType cowardAgentType { get; private set; }
 
-        FSM<CowardAgent> fsm;
+        FSM<Speedy> fsm;
 
-        public FSM<CowardAgent> FSM
+        public FSM<Speedy> FSM
         {
             get { return fsm; }
         }
@@ -52,7 +52,7 @@ namespace CowardAgent
         /// Constructer
         /// </summary>
         /// <param name="propertyStorage"></param>
-        public CowardAgent(IPropertyStorage propertyStorage, int id, cowardType type)
+        public Speedy(IPropertyStorage propertyStorage, int id, cowardType type)
             : base(propertyStorage)
         {
             cowardAgentType = type;
@@ -86,7 +86,7 @@ namespace CowardAgent
             #endregion
 
             //Start state created
-            fsm = new FSM<CowardAgent>(this);
+            fsm = new FSM<Speedy>(this);
             fsm.ChangeState(Explore.Instance);
         }
 

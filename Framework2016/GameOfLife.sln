@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReflectionChecker", "Reflec
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Framework and Game of life", "Framework and Game of life", "{11E37A2F-C50C-48D7-A2DC-ECC35E7F6091}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CowardAgent", "CowardAgent\CowardAgent.csproj", "{C366E487-0D03-469C-AB57-69236F3ED0D7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Speedy", "CowardAgent\Speedy.csproj", "{C366E487-0D03-469C-AB57-69236F3ED0D7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Coward", "Coward", "{5A72BF30-9AC3-4EB0-B101-774B8493FA66}"
 EndProject

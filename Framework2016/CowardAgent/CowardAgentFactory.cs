@@ -7,9 +7,9 @@ using System.Text;
 using AIFramework;
 using AIFramework.Entities;
 
-namespace CowardAgent
+namespace Speedy
 {
-    class CowardAgentFactory : AgentFactory
+    class SpeedyAgentFactory : AgentFactory
     {
         int lastId = 0;
         int cowardsMade = 0;
@@ -27,12 +27,12 @@ namespace CowardAgent
             {
                 noncowards++;
                 cowardsMade++;
-                return new CowardAgent(propertyStorage, lastId, cowardType.nonCoward);
+                return new Speedy(propertyStorage, lastId, cowardType.nonCoward);
             }
             else
             {
                 cowardsMade++;
-                return new CowardAgent(propertyStorage, lastId, cowardType.coward);
+                return new Speedy(propertyStorage, lastId, cowardType.coward);
             }
         }
 
@@ -50,18 +50,18 @@ namespace CowardAgent
             {
                 noncowards++;
                 cowardsMade++;
-                return new CowardAgent(propertyStorage, lastId, cowardType.nonCoward);
+                return new Speedy(propertyStorage, lastId, cowardType.nonCoward);
             }
             else
             {
                 cowardsMade++;
-                return new CowardAgent(propertyStorage, lastId, cowardType.coward);
+                return new Speedy(propertyStorage, lastId, cowardType.coward);
             }
         }
 
         public override Type ProvidedAgentType
         {
-            get { return typeof(CowardAgent); }
+            get { return typeof(Speedy); }
         }
 
         public override string Creators

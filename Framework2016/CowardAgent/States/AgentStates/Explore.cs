@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 using AIFramework;
 using AIFramework.Actions;
 using AIFramework.Entities;
-using CowardAgent.States.AgentStates;
+using Speedy.States.AgentStates;
 
-namespace CowardAgent
+namespace Speedy
 {
-    class Explore : IState<CowardAgent>
+    class Explore : IState<Speedy>
     {
         private static Explore _instance;
         Random rnd;
@@ -32,7 +32,7 @@ namespace CowardAgent
             rnd = new Random();
         }
 
-        public void Enter(CowardAgent obj)
+        public void Enter(Speedy obj)
         {
             //Change your Direction
             if ((obj.lastDirectionAction + obj.directionChangeDelay <= obj.action) || (obj.direction.X == 0 && obj.direction.Y == 0))
@@ -42,7 +42,7 @@ namespace CowardAgent
             }
         }
 
-        public void Execute(CowardAgent obj)
+        public void Execute(Speedy obj)
         {
             if (obj.lastDirectionAction + (obj.directionChangeDelay / 5) <= obj.action)
             {
@@ -66,7 +66,7 @@ namespace CowardAgent
             obj.NextAction = new Move(obj.direction);//move
         }
 
-        public void Exit(CowardAgent obj)
+        public void Exit(Speedy obj)
         {
 
         }

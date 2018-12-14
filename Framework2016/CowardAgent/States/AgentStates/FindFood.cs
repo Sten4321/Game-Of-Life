@@ -7,9 +7,9 @@ using AIFramework;
 using AIFramework.Actions;
 using AIFramework.Entities;
 
-namespace CowardAgent
+namespace Speedy
 {
-    class FindFood : IState<CowardAgent>
+    class FindFood : IState<Speedy>
     {
         private static FindFood _instance;
 
@@ -30,12 +30,12 @@ namespace CowardAgent
 
         }
 
-        public void Enter(CowardAgent obj)
+        public void Enter(Speedy obj)
         {
 
         }
 
-        public void Execute(CowardAgent obj)
+        public void Execute(Speedy obj)
         {
             List<IEntity> nearPlants = obj.ViewedEntities.FindAll(x => x is Plant);
 
@@ -48,7 +48,7 @@ namespace CowardAgent
             obj.FSM.ChangeState(Explore.Instance);
         }
 
-        public void Exit(CowardAgent obj)
+        public void Exit(Speedy obj)
         {
 
         }

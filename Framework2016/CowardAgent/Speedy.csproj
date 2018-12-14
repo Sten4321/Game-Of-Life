@@ -7,8 +7,8 @@
     <ProjectGuid>{C366E487-0D03-469C-AB57-69236F3ED0D7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CowardAgent</RootNamespace>
-    <AssemblyName>CowardAgent</AssemblyName>
+    <RootNamespace>Speedy</RootNamespace>
+    <AssemblyName>Speedy</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>

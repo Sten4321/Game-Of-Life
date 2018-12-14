@@ -7,9 +7,9 @@ using AIFramework;
 using AIFramework.Actions;
 using AIFramework.Entities;
 
-namespace CowardAgent.States.AgentStates
+namespace Speedy.States.AgentStates
 {
-    class Multiply : IState<CowardAgent>
+    class Multiply : IState<Speedy>
     {
         private static Multiply _instance;
 
@@ -30,20 +30,20 @@ namespace CowardAgent.States.AgentStates
 
         }
 
-        public void Enter(CowardAgent obj)
+        public void Enter(Speedy obj)
         {
 
         }
 
-        public void Execute(CowardAgent obj)
+        public void Execute(Speedy obj)
         {
-            List<IEntity> proCoward = obj.ViewedEntities.FindAll(x => x is CowardAgent
+            List<IEntity> proCoward = obj.ViewedEntities.FindAll(x => x is Speedy
             && x != obj && AIVector.Distance(obj.Position, x.Position) < AIModifiers.maxProcreateRange);
 
             //Mate Now Multiply MORE
             if (proCoward.Count > 0 && obj.ProcreationCountDown <= 0)
             {
-                foreach (CowardAgent coward in proCoward)
+                foreach (Speedy coward in proCoward)
                 {
                     if (coward.ProcreationCountDown <= 0)
                     {
@@ -66,7 +66,7 @@ namespace CowardAgent.States.AgentStates
             }
         }
 
-        public void Exit(CowardAgent obj)
+        public void Exit(Speedy obj)
         {
 
         }

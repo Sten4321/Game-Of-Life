@@ -7,9 +7,9 @@ using AIFramework;
 using AIFramework.Actions;
 using AIFramework.Entities;
 
-namespace CowardAgent
+namespace Speedy
 {
-    class FindEnemies : IState<CowardAgent>
+    class FindEnemies : IState<Speedy>
     {
         private static FindEnemies _instance;
 
@@ -30,14 +30,14 @@ namespace CowardAgent
 
         }
 
-        public void Enter(CowardAgent obj)
+        public void Enter(Speedy obj)
         {
 
         }
 
-        public void Execute(CowardAgent obj)
+        public void Execute(Speedy obj)
         {
-            List<IEntity> nearEnemies = obj.ViewedEntities.FindAll(x => x.GetType() != typeof(CowardAgent)
+            List<IEntity> nearEnemies = obj.ViewedEntities.FindAll(x => x.GetType() != typeof(Speedy)
             && x is Agent);
 
             //Find Your Mate
@@ -54,7 +54,7 @@ namespace CowardAgent
             obj.FSM.ChangeState(FindFood.Instance);
         }
 
-        public void Exit(CowardAgent obj)
+        public void Exit(Speedy obj)
         {
 
         }

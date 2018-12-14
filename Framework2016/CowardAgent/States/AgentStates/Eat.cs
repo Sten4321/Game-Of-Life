@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 using AIFramework;
 using AIFramework.Actions;
 using AIFramework.Entities;
-using CowardAgent.States.AgentStates;
+using Speedy.States.AgentStates;
 
-namespace CowardAgent
+namespace Speedy
 {
-    class Eat : IState<CowardAgent>
+    class Eat : IState<Speedy>
     {
         private static Eat _instance;
         Random rnd;
@@ -32,12 +32,12 @@ namespace CowardAgent
             rnd = new Random();
         }
 
-        public void Enter(CowardAgent obj)
+        public void Enter(Speedy obj)
         {
 
         }
 
-        public void Execute(CowardAgent obj)
+        public void Execute(Speedy obj)
         {
             List<IEntity> feedPlants = obj.ViewedEntities.FindAll(x => x is Plant
             && AIVector.Distance(obj.Position, x.Position) < AIModifiers.maxFeedingRange);
@@ -50,7 +50,7 @@ namespace CowardAgent
             obj.FSM.ChangeState(FindMate.Instance);
         }
 
-        public void Exit(CowardAgent obj)
+        public void Exit(Speedy obj)
         {
 
         }
