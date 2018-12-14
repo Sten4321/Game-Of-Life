@@ -71,9 +71,9 @@ namespace CowardAgent
                     break;
                 case cowardType.nonCoward:
                     //Max 250
-                    MovementSpeed = 130;//flat * movement
-                    Strength = 40;//flat dmg
-                    Health = 40;//flat health
+                    MovementSpeed = 70;//flat * movement
+                    Strength = 70;//flat dmg
+                    Health = 70;//flat health
                     Eyesight = 40;//flat distance
                     Endurance = 0;//if hunger below endurance gain health regain
                     Dodge = 0;//flat chace of dodge
